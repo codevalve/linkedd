@@ -10,7 +10,10 @@
     "build:css": "tailwindcss build -i src/tailwind.css -o public/css/tailwind.css"
   },
   "nodemonConfig": {
-    "ignore": ["**/test/**", "**/docs/**"],
+    "ignore": [
+      "**/test/**",
+      "**/docs/**"
+    ],
     "delay": 0,
     "ext": "js,ejs,json"
   },
@@ -23,7 +26,8 @@
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.0",
-    "express-ejs-layouts": "^2.5.1"
+    "express-ejs-layouts": "^2.5.1",
+    "puppeteer": "^23.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

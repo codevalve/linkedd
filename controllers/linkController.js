@@ -21,12 +21,15 @@ exports.getNewLinkForm = (req, res) => {
 
 exports.createLink = async (req, res) => {
   try {
-    const { title, url, description } = req.body;
+    const { title, url, description, readTime, author, tags } = req.body;
     await prisma.link.create({
       data: {
         title,
         url,
         description,
+        readTime,
+        author,
+        tags,
       },
     });
     res.redirect('/links');
@@ -35,3 +38,5 @@ exports.createLink = async (req, res) => {
     res.status(500).send('Error creating link');
   }
 };
+
+// ... (keep other methods like edit, update, and delete)
