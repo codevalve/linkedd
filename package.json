@@ -6,8 +6,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node prisma/seed.js",
     "start": "node server.js",
-    "dev": "nodemon server.js",
+    "dev": "npm run build:css && nodemon server.js -e ejs",
     "build:css": "tailwindcss build -i src/tailwind.css -o public/css/tailwind.css"
+  },
+  "nodemonConfig": {
+    "ignore": ["**/test/**", "**/docs/**"],
+    "delay": 0,
+    "ext": "js,ejs,json"
   },
   "keywords": [],
   "author": "",
