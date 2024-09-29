@@ -21,7 +21,8 @@ exports.getNewLinkForm = (req, res) => {
 
 exports.createLink = async (req, res) => {
   try {
-    const { title, url, description, readTime, author, tags } = req.body;
+    const { title, url, description, readTime, author, tags, screenshot } = req.body;
+  
     await prisma.link.create({
       data: {
         title,
@@ -30,6 +31,7 @@ exports.createLink = async (req, res) => {
         readTime,
         author,
         tags,
+        screenshot
       },
     });
     res.redirect('/links');

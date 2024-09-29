@@ -1,6 +1,6 @@
 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
   <% links.forEach(link => { %>
-    <div class="relative w-full max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-800">
+    <div class="relative w-full max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-800" style="background-image: url('<% link.screenshot %>');">
       <div class="relative p-6 flex flex-col h-full">
         <div class="flex justify-between items-start">
           <p class="text-xs text-gray-400"><%= link.readTime %> · <%= link.createdAt.toLocaleDateString() %></p>
