@@ -3,3 +3,14 @@
 @tailwind utilities;
 
 /* You can add any custom styles here */
+
+.star-button {
+    cursor: pointer; /* Makes it look interactive */
+    background: transparent; /* Keeps the button background minimal */
+    border: none; /* Removes default button border */
+    padding: 0.25rem; /* Adds a little padding for better accessibility */
+  }
+  
+  .star-icon {
+    transition: color 0.2s ease-in-out; /* Smooth transition for color changes */
+  }

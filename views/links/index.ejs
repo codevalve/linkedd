@@ -5,8 +5,7 @@
   <% if (links.length > 0) { %>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <% links.forEach(link => { %>
-        <div class="w-full rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl bg-gray-900 flex flex-col min-h-[15rem] h-full border border-transparent hover:border-blue-400">
-          
+        <div class="w-full rounded-lg overflow-hidden shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl bg-gray-900 flex flex-col min-h-[15rem] h-full">
           <!-- Main Content and Screenshot Wrapper -->
           <div class="flex flex-row h-full">
             
@@ -29,8 +28,8 @@
           </div>
 
           <!-- Footer -->
-          <div class="flex items-center p-4 bg-gray-900 text-white w-full">
-            <img src="/path/to/author-avatar.jpg" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+      <div class="flex items-center p-4 bg-gray-900 text-white w-full">
+            <img src="/images/mw-sq.png" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
             <div class="flex-1">
               <p class="text-sm font-medium"><%= link.author %></p>
               <p class="text-xs flex gap-2 mt-1 overflow-hidden whitespace-nowrap">
@@ -40,6 +39,9 @@
                   <% }) %>
                 <% } %>
               </p>
+              <button class="star-button mr-4" data-id="<%= link.id %>">
+                <i class="star-icon fa <%= link.starred ? 'fa-star text-yellow-400' : 'fa-star-o text-gray-400' %>"> </i>
+              </button>
             </div>
           </div>
 

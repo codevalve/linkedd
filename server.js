@@ -5,20 +5,24 @@ const { PrismaClient } = require('@prisma/client');
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 require('dotenv').config();
-const helmet = require('helmet');
+//const helmet = require('helmet');
 
 const app = express();
 
+/*
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://cdn.tailwindcss.com","https://codevalve.com","https://codevalve.github.io"], // Allow scripts from 'self' and other trusted sources
+      scriptSrc: ["'self'", "https://cdn.tailwindcss.com","https://cdnjs.cloudflare.com","https://codevalve.com","https://codevalve.github.io"], // Allow scripts from 'self' and other trusted sources
       objectSrc: ["'none'"],
+      styleSrc: ["'self'", "https://cdnjs.cloudflare.com"], // Allow Font Awesome styles
+      fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],  // Allow fonts from Font Awesome
       upgradeInsecureRequests: [],
     },
   })
 );
+*/
 const PORT = process.env.PORT || 3000;
 
 const prisma = new PrismaClient();

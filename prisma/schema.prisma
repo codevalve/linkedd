@@ -16,5 +16,6 @@ model Link {
   author      String
   tags        String
   screenshot  String?
+  starred     Boolean @default(false)
   createdAt   DateTime @default(now())
 }
