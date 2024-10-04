@@ -42,6 +42,51 @@
           </div>
       <% }) %>
   </div>
+  <!-- New styled lower section -->
+  <div class="grid gap-8 md:grid-cols-3">
+    <!-- Recently Added Links -->
+    <div class="bg-card-bg rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4 text-white">Recently Added</h2>
+        <ul class="space-y-4">
+            <% links.slice(0, 5).forEach(link => { %>
+                <li class="border-b border-gray-700 pb-2">
+                    <a href="<%= link.url %>" class="text-blue-400 hover:text-blue-300 text-sm font-medium"><%= link.title %></a>
+                    <p class="text-gray-500 text-xs mt-1"><%= link.createdAt.toLocaleDateString() %></p>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+
+    <!-- Tag Cloud -->
+    <div class="bg-card-bg rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4 text-white">Popular Tags</h2>
+        <div class="flex flex-wrap gap-2">
+            <% 
+            const allTags = links.flatMap(link => link.tags ? link.tags.split(',').map(tag => tag.trim()) : []);
+            const tagCounts = allTags.reduce((acc, tag) => {
+                acc[tag] = (acc[tag] || 0) + 1;
+                return acc;
+            }, {});
+            const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 20);
+            %>
+            <% sortedTags.forEach(([tag, count]) => { %>
+                <span class="text-xs text-gray-400 bg-gray-800 rounded-full px-3 py-1 hover:bg-gray-700 transition-colors duration-200 cursor-pointer"><%= tag %> (<%= count %>)</span>
+            <% }) %>
+        </div>
+    </div>
+
+    <!-- Newsletter Signup -->
+    <div class="bg-card-bg rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4 text-white">Newsletter</h2>
+        <p class="text-gray-400 mb-4 text-sm">Stay updated with our latest links and resources.</p>
+        <form class="space-y-4">
+            <div class="relative">
+                <input type="email" placeholder="Your email address" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-blue-500 pr-24">
+                <button type="submit" class="absolute right-1 top-1 bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition duration-300 text-sm">Subscribe</button>
+            </div>
+        </form>
+    </div>
+</div>
 </div>
 
 <script>
