@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LINKEDD</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            clifford: '#da373d',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Links</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'card-bg': '#1a1a1a',
+                        'card-hover': '#252525',
+                        'avatar-border': '#3b82f6', // This is a blue color that should match the Norlin theme
+                    },
+                }
+            }
         }
-      }
-    }
-  </script>
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
-  <nav class="bg-gray-800 p-4">
+<body class="text-gray-300">
+  <nav class="p-4">
     <div class="container mx-auto flex justify-between items-center">
       <a href="/" class="text-white text-2xl font-bold">LINKEDD</a>
       <a href="/links/new" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Add New Link</a>
