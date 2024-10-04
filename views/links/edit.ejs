@@ -1,0 +1,45 @@
+<!-- edit.ejs -->
+<div class="container mx-auto py-8">
+    <h1 class="text-2xl font-bold mb-4">Edit Link</h1>
+    <form action="/links/<%= link.id %>/edit" method="POST" class="space-y-4">
+      <div>
+        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+        <input type="text" id="title" name="title" value="<%= link.title %>" required class="input input-bordered w-full" />
+      </div>
+  
+      <div>
+        <label for="url" class="block text-sm font-medium text-gray-700">URL</label>
+        <input type="text" id="url" name="url" value="<%= link.url %>" required class="input input-bordered w-full" />
+      </div>
+  
+      <div>
+        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea id="description" name="description" rows="3" class="input input-bordered w-full"><%= link.description %></textarea>
+      </div>
+  
+      <div>
+        <label for="readTime" class="block text-sm font-medium text-gray-700">Read Time</label>
+        <input type="text" id="readTime" name="readTime" value="<%= link.readTime %>" class="input input-bordered w-full" />
+      </div>
+  
+      <div>
+        <label for="author" class="block text-sm font-medium text-gray-700">Author</label>
+        <input type="text" id="author" name="author" value="<%= link.author %>" class="input input-bordered w-full" />
+      </div>
+  
+      <div>
+        <label for="tags" class="block text-sm font-medium text-gray-700">Tags</label>
+        <input type="text" id="tags" name="tags" value="<%= link.tags %>" class="input input-bordered w-full" />
+      </div>
+  
+      <div>
+        <label for="screenshot" class="block text-sm font-medium text-gray-700">Screenshot URL</label>
+        <input type="text" id="screenshot" name="screenshot" value="<%= link.screenshot %>" class="input input-bordered w-full" />
+      </div>
+  
+      <div class="mt-6">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/links" class="btn btn-secondary ml-2">Cancel</a>
+      </div>
+    </form>
+  </div>
