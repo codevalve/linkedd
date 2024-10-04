@@ -1,24 +1,51 @@
-<div class="container mx-auto py-8">
-  <h1 class="text-2xl font-bold mb-4">All Links</h1>
-  <a href="/links/new" class="btn btn-primary mb-4">Add New Link</a>
+<h1 class="text-3xl font-bold mb-6">Your Links</h1>
 
-  <% if (links.length > 0) { %>
-    <div class="grid grid-cols-1 gap-4">
-      <% links.forEach(link => { %>
-        <div class="bg-white shadow-md rounded p-4" id="link-item-<%= link.id %>">
-          <h2 class="text-xl font-semibold"><%= link.title %></h2>
-          <p><%= link.description %></p>
-          <a href="<%= link.url %>" class="text-blue-500" target="_blank"><%= link.url %></a>
-          <div class="mt-4">
-            <a href="/links/<%= link.id %>/edit" class="btn btn-secondary mr-2">Edit</a>
-            <form action="/links/<%= link.id %>/delete" method="POST" class="inline">
-              <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this link?');">Delete</button>
-            </form>
+<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+  <% links.forEach(link => { %>
+    <div class="relative w-full max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-800">
+      <div class="relative p-6 flex flex-col h-full">
+        <div class="flex justify-between items-start">
+          <p class="text-xs text-gray-400"><%= link.readTime %> · <%= link.createdAt.toLocaleDateString() %></p>
+          <button class="text-gray-400 hover:text-yellow-400 cursor-pointer star-button" data-id="<%= link.id %>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="star-icon">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <h2 class="text-white text-2xl font-bold mt-4 mb-2"><%= link.title %></h2>
+        <p class="text-gray-300 text-sm mb-2"><%= link.description %></p>
+        <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 text-sm mb-4">Visit Website</a>
+        <div class="flex items-center mt-auto">
+          <img src="/placeholder.svg?height=40&width=40" alt="Author" class="rounded-full mr-3 w-8 h-8">
+          <div>
+            <p class="text-white text-sm font-semibold"><%= link.author %></p>
+            <div class="flex flex-wrap gap-2 mt-1">
+              <% if (link.tags && typeof link.tags === 'string') { %>
+                <% link.tags.split(',').forEach(tag => { %>
+                  <span class="text-xs text-gray-300 bg-gray-700 rounded-full px-2 py-1 text-[10px]"><%= tag.trim() %></span>
+                <% }) %>
+              <% } else { %>
+                <span class="text-xs text-gray-300 bg-gray-700 rounded-full px-2 py-1 text-[10px]">No tags</span>
+              <% } %>
+            </div>
           </div>
         </div>
-      <% }) %>
+      </div>
     </div>
-  <% } else { %>
-    <p>No links found. <a href="/links/new" class="text-blue-500">Create one now</a>.</p>
-  <% } %>
+  <% }) %>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const starButtons = document.querySelectorAll('.star-button');
+    starButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const linkId = button.getAttribute('data-id');
+        const starIcon = button.querySelector('.star-icon');
+        starIcon.classList.toggle('text-yellow-400');
+        // Here you can add AJAX call to update the star status in the backend
+        console.log(`Toggled star for link ${linkId}`);
+      });
+    });
+  });
+</script>

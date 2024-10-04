@@ -12,7 +12,7 @@ model Link {
   title       String
   url         String
   description String?
-  readTime    String
+  readTime    String?
   author      String
   tags        String
   screenshot  String?
