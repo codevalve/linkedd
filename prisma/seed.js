@@ -9,7 +9,9 @@ async function main() {
       description: 'Official Prisma documentation for working with databases in Node.js and TypeScript',
       readTime: '5 min read',
       author: 'Prisma Team',
-      tags: 'Database,ORM,Node.js'
+      tags: 'Database,ORM,Node.js',
+      screenshot: '/images/www-prisma-iodocs.png',
+      starred: true
     },
   })
 
@@ -20,7 +22,9 @@ async function main() {
       description: 'Resources for developers, by developers',
       readTime: '3 min read',
       author: 'Mozilla',
-      tags: 'Web Development,JavaScript,HTML,CSS'
+      tags: 'Web Development,JavaScript,HTML,CSS',
+      screenshot: '/images/developer-mozilla-orgen-US.png',
+      starred: false
     },
   })
 
@@ -31,7 +35,9 @@ async function main() {
       description: 'Rapidly build modern websites without ever leaving your HTML',
       readTime: '4 min read',
       author: 'Tailwind Labs',
-      tags: 'CSS,Frontend,Utility-First'
+      tags: 'CSS,Frontend,Utility-First',
+      screenshot: "/images/tailwindcss-com.png",
+      starred: false
     },
   })
 

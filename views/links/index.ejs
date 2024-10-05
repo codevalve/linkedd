@@ -1,30 +1,106 @@
-<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-  <% links.forEach(link => { %>
-    <div class="relative w-full max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-800" style="background-image: url('<% link.screenshot %>');">
-      <div class="relative p-6 flex flex-col h-full">
-        <div class="flex justify-between items-start">
-          <p class="text-xs text-gray-400"><%= link.readTime %> · <%= link.createdAt.toLocaleDateString() %></p>
-          <button class="text-gray-400 hover:text-yellow-400 cursor-pointer star-button" data-id="<%= link.id %>">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="star-icon">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-          </button>
-        </div>
-        <h2 class="text-white text-2xl font-bold mt-4 mb-2"><%= link.title %></h2>
-        <p class="text-gray-300 text-sm mb-2"><%= link.description %></p>
-        <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 text-sm mb-4">Visit Website</a>
-        <div class="flex items-center mt-auto">
-          <img src="/placeholder.svg?height=40&width=40" alt="Author" class="rounded-full mr-3 w-8 h-8">
-          <div>
-            <p class="text-white text-sm font-semibold"><%= link.author %></p>
-            <div class="flex flex-wrap gap-2 mt-1">
-              <% link.tags.split(',').forEach(tag => { %>
-                <span class="text-xs text-gray-300 bg-gray-700 rounded-full px-2 py-1 text-[10px]"><%= tag.trim() %></span>
-              <% }) %>
+<div class="container mx-auto py-8">
+  <h1 class="text-2xl font-bold mb-4">All Links</h1>
+  <a href="/links/new" class="btn btn-primary mb-4">Add New Link</a>
+
+  <% if (links.length > 0) { %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% links.forEach(link => { %>
+        <div class="w-full rounded-lg overflow-hidden shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl bg-gray-900 flex flex-col min-h-[15rem] h-full">
+          <!-- Main Content and Screenshot Wrapper -->
+          <div class="flex flex-row h-full">
+            
+            <!-- Left Side - Content -->
+            <div class="w-1/2 p-4 bg-gray-800 text-white flex flex-col justify-start">
+              <div class="overflow-hidden">
+                <p class="text-sm mb-1 truncate"><%= link.readTime %> read - <%= link.createdAt ? link.createdAt.toDateString() : '' %></p>
+                <h2 class="text-xl font-semibold mb-2 truncate"><%= link.title %></h2>
+                <p class="text-sm mb-4 overflow-hidden truncate"><%= link.description %></p>
+              </div>
+            </div>
+
+            <!-- Right Side - Screenshot -->
+            <div class="w-1/2 h-full relative group"
+                 style="background: url('<%= link.screenshot || '/path/to/default-image.jpg' %>') center center / cover no-repeat;">
+              <!-- Darker Gradient Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent opacity-90 group-hover:opacity-0 transition-opacity duration-300"></div>
+            </div>
+
+          </div>
+
+          <!-- Footer -->
+      <div class="flex items-center p-4 bg-gray-900 text-white w-full">
+            <img src="/images/mw-sq.png" alt="Author avatar" class="w-8 h-8 rounded-full mr-2">
+            <div class="flex-1">
+              <p class="text-sm font-medium"><%= link.author %></p>
+              <p class="text-xs flex gap-2 mt-1 overflow-hidden whitespace-nowrap">
+                <% if (link.tags) { %>
+                  <% link.tags.split(',').slice(0, 3).forEach(tag => { %>
+                    <span class="bg-gray-700 text-gray-200 px-2 py-1 rounded-lg max-w-[6rem] truncate"><%= tag.trim() %></span>
+                  <% }) %>
+                <% } %>
+              </p>
+              <button class="star-button mr-4" data-id="<%= link.id %>">
+                <i class="star-icon fa <%= link.starred ? 'fa-star text-yellow-400' : 'fa-star-o text-gray-400' %>"> </i>
+              </button>
             </div>
           </div>
+
         </div>
-      </div>
+      <% }) %>
     </div>
-  <% }) %>
+  <% } else { %>
+    <p>No links found. <a href="/links/new" class="text-blue-500">Create one now</a>.</p>
+  <% } %>
 </div>
+  
+<hr class="h-px my-16 bg-gray-200 border-0 dark:bg-gray-700">
+
+  <!-- New styled lower section -->
+  <div class="grid gap-8 md:grid-cols-3">
+    <!-- Recently Added Links -->
+    <div class="bg-card-bg rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-15% rounded-md p-2">Recently Added</h2>
+        <ul class="space-y-4">
+            <% links.slice(0, 5).forEach(link => { %>
+                <li class="border-b border-gray-700 pb-2">
+                    <a href="<%= link.url %>" class="text-blue-400 hover:text-blue-300 text-sm font-medium"><%= link.title %></a>
+                    <p class="text-gray-500 text-xs mt-1"><%= link.createdAt.toLocaleDateString() %></p>
+                    <button class="text-xs text-blue-400 ml-4 hover:text-blue-300">Read More</button>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+
+    <!-- Popular Tags Section -->
+<div class="bg-card-bg rounded-lg p-6">
+  <h2 class="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-15% rounded-md p-2">Popular Tags</h2>
+  <div class="flex flex-wrap gap-2" id="tag-container">
+    <% 
+    const allTags = links.flatMap(link => link.tags ? link.tags.split(',').map(tag => tag.trim()) : []);
+    const tagCounts = allTags.reduce((acc, tag) => {
+        acc[tag] = (acc[tag] || 0) + 1;
+        return acc;
+    }, {});
+    const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 20);
+    %>
+    <% sortedTags.forEach(([tag, count], index) => { %>
+      <span class="text-xs text-gray-400 bg-gray-800 rounded-full px-3 py-1 border border-gray-700 hover:border-blue-400 transition-colors duration-200 cursor-pointer tag-item <%= index >= 10 ? 'hidden-md' : '' %>"><%= tag %> (<%= count %>)</span>
+    <% }) %>
+  </div>
+</div>
+
+    <!-- Newsletter Signup -->
+    <div class="bg-card-bg rounded-lg p-6">
+        <h2 class="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-15% rounded-md p-2">Newsletter</h2>
+        <p class="text-gray-400 mb-4 text-sm">Stay updated with our latest links and resources.</p>
+        <form class="space-y-4">
+            <div class="relative">
+                <input type="email" placeholder="Your email address" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-blue-500 pr-24">
+                <p id="newsletter-success" class="text-green-500 text-sm hidden mt-2">Thank you for subscribing!</p>
+                <button type="submit" class="absolute right-1 top-1 bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 transition duration-300 text-sm">Subscribe</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/main.js"></script>
