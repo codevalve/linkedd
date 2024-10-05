@@ -1066,6 +1066,22 @@ video {
 
 /* You can add any custom styles here */
 
+.star-button {
+  cursor: pointer;
+  /* Makes it look interactive */
+  background: transparent;
+  /* Keeps the button background minimal */
+  border: none;
+  /* Removes default button border */
+  padding: 0.25rem;
+  /* Adds a little padding for better accessibility */
+}
+
+.star-icon {
+  transition: color 0.2s ease-in-out;
+  /* Smooth transition for color changes */
+}
+
 .hover\:-translate-y-1:hover {
   --tw-translate-y: -0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
